@@ -1,0 +1,27 @@
+{
+  "errors": {
+    "internal_server_error": "Erro interno do servidor",
+    "not_found": "Recurso não encontrado",
+    "validation_error": "Erro de validação",
+    "bad_request": "Requisição inválida",
+    "too_many_requests": "Muitas requisições, por favor tente novamente mais tarde",
+    "cnpj_not_found": "Empresa com CNPJ {{cnpj}} não foi encontrada",
+    "cnpj_invalid": "O CNPJ informado é inválido",
+    "upstream_unavailable": "O provedor de dados externo está indisponível no momento",
+    "dataset_empty": "Nenhuma empresa encontrada para os filtros informados"
+  },
+  "success": {
+    "company_fetched": "Dados da empresa recuperados com sucesso",
+    "dataset_generated": "Dataset gerado com sucesso",
+    "companies_listed": "Empresas listadas com sucesso"
+  },
+  "validation": {
+    "cnpj_required": "CNPJ é obrigatório",
+    "cnpj_length": "O CNPJ deve ter exatamente 14 dígitos (somente números)",
+    "state_invalid": "Sigla de estado brasileiro inválida",
+    "page_min": "A página deve ser no mínimo 1",
+    "limit_min": "O limite deve ser no mínimo 1",
+    "limit_max": "O limite não pode ultrapassar 100",
+    "sector_invalid": "Valor de setor inválido"
+  }
+}

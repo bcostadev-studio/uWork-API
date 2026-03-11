@@ -1,0 +1,27 @@
+{
+  "errors": {
+    "internal_server_error": "Internal server error",
+    "not_found": "Resource not found",
+    "validation_error": "Validation error",
+    "bad_request": "Bad request",
+    "too_many_requests": "Too many requests, please try again later",
+    "cnpj_not_found": "Company with CNPJ {{cnpj}} was not found",
+    "cnpj_invalid": "The provided CNPJ is invalid",
+    "upstream_unavailable": "Upstream data provider is currently unavailable",
+    "dataset_empty": "No companies found for the given filters"
+  },
+  "success": {
+    "company_fetched": "Company data retrieved successfully",
+    "dataset_generated": "Dataset generated successfully",
+    "companies_listed": "Companies listed successfully"
+  },
+  "validation": {
+    "cnpj_required": "CNPJ is required",
+    "cnpj_length": "CNPJ must be exactly 14 digits (numbers only)",
+    "state_invalid": "Invalid Brazilian state abbreviation",
+    "page_min": "Page must be at least 1",
+    "limit_min": "Limit must be at least 1",
+    "limit_max": "Limit cannot exceed 100",
+    "sector_invalid": "Invalid sector value"
+  }
+}
