@@ -387,6 +387,7 @@ Copy `.env.example` to `.env` and adjust as needed.
 | Variable | Default | Description |
 |---|---|---|
 | `NODE_ENV` | `development` | `development`, `production`, or `test` |
+| `API_HOST` | auto-resolved | Hostname used for Swagger server URLs and Nginx `server_name` matching. Defaults to `uwork.api.dev` in development and `uwork.api.prod` in production. Must match your `/etc/hosts` entry. |
 | `PORT` | `3000` | Port the Node process listens on |
 | `BRASIL_API_BASE_URL` | `https://brasilapi.com.br/api` | BrasilAPI base URL |
 | `RECEITAWS_BASE_URL` | `https://receitaws.com.br/v1` | ReceitaWS base URL |
