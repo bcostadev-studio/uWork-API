@@ -19,7 +19,13 @@ services:
     networks:
       - uwork_network
     healthcheck:
-      test: ["CMD", "node", "-e", "require('http').get('http://localhost:3000/health', r => process.exit(r.statusCode === 200 ? 0 : 1)).on('error', () => process.exit(1))"]
+      test:
+        [
+          "CMD",
+          "node",
+          "-e",
+          "require('http').get('http://localhost:3000/health', r => process.exit(r.statusCode === 200 ? 0 : 1)).on('error', () => process.exit(1))",
+        ]
       interval: 30s
       timeout: 10s
       retries: 3
@@ -40,6 +46,8 @@ services:
     depends_on:
       api:
         condition: service_healthy
+      cert-gen:
+        condition: service_completed_successfully
     networks:
       - uwork_network
 
@@ -51,16 +59,29 @@ services:
     command: >
       sh -c "
         apk add --no-cache openssl &&
-        if [ ! -f /ssl/server.crt ]; then
-          echo 'Generating self-signed TLS certificate...' &&
-          openssl req -x509 -nodes -days 365 -newkey rsa:2048
-            -keyout /ssl/server.key
-            -out /ssl/server.crt
-            -subj '/C=BR/ST=Sao Paulo/L=Sao Paulo/O=uWork/OU=API/CN=localhost'
-            -addext 'subjectAltName=DNS:localhost,IP:127.0.0.1' &&
-          echo 'Certificate generated successfully.'
+
+        if [ ! -f /ssl/uwork.api.dev.crt ]; then
+          echo 'Generating certificate for uwork.api.dev...' &&
+          openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
+            -keyout /ssl/uwork.api.dev.key \
+            -out    /ssl/uwork.api.dev.crt \
+            -subj   '/C=BR/ST=Sao Paulo/L=Sao Paulo/O=uWork/OU=API/CN=uwork.api.dev' \
+            -addext 'subjectAltName=DNS:uwork.api.dev,IP:127.0.0.1' &&
+          echo 'uwork.api.dev certificate generated.'
         else
-          echo 'Certificate already exists, skipping generation.'
+          echo 'uwork.api.dev certificate already exists, skipping.'
+        fi &&
+
+        if [ ! -f /ssl/uwork.api.prod.crt ]; then
+          echo 'Generating certificate for uwork.api.prod...' &&
+          openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
+            -keyout /ssl/uwork.api.prod.key \
+            -out    /ssl/uwork.api.prod.crt \
+            -subj   '/C=BR/ST=Sao Paulo/L=Sao Paulo/O=uWork/OU=API/CN=uwork.api.prod' \
+            -addext 'subjectAltName=DNS:uwork.api.prod,IP:127.0.0.1' &&
+          echo 'uwork.api.prod certificate generated.'
+        else
+          echo 'uwork.api.prod certificate already exists, skipping.'
         fi
       "
     networks:
