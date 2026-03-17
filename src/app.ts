@@ -9,6 +9,7 @@ import { swaggerSpec } from "./config/swagger";
 import { errorHandlerMiddleware } from "./core/middlewares/error-handler.middleware";
 import { notFoundMiddleware } from "./core/middlewares/not-found.middleware";
 import companiesRouter from "./modules/companies/routes";
+import jobsRouter from "./modules/jobs/routes";
 
 const buildRateLimiter = () =>
   rateLimit({
@@ -85,6 +86,7 @@ export const createApp = (): Application => {
   );
 
   app.use("/api/v1/companies", companiesRouter);
+  app.use("/api/v1/jobs", jobsRouter);
 
   app.use(notFoundMiddleware);
   app.use(errorHandlerMiddleware);
